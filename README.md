@@ -257,10 +257,48 @@ python scripts/evaluate.py --model-path checkpoints/best_model.pth --data-path d
 
 ## 🧠 Model Architecture
 
-<div align="center">
-  <img src="assets/images/architecture_diagram.png" alt="Labelee Architecture" width="800"/>
-  <p><em>High-level architecture of the Labelee Foundation Model</em></p>
-</div>
+```mermaid
+graph TD
+    subgraph "1. Inputs"
+        A[Image Input]
+        B[Text Input]
+    end
+
+    subgraph "2. Encoders (Parallel Streams)"
+        direction LR
+        subgraph "Vision Path"
+            A --> C(Hybrid Image Encoder)
+            C --> C1["timm ViT Backbone"]
+            C --> C2["Spatial Attention Module"]
+        end
+        subgraph "Text Path"
+            B --> D(Hybrid Text Encoder)
+            D --> D1["Hugging Face Transformer"]
+            D --> D2["Semantic Enhancement"]
+        end
+    end
+
+    subgraph "3. Fusion"
+        C1 --> F{Cross-Modal Fusion Network}
+        D1 --> F
+    end
+
+    subgraph "4. Multi-Task Heads"
+        F --> G[Similarity Head]
+        F --> H[Classification Head]
+        F --> I[Contrastive Head]
+        F --> J[Reconstruction Head]
+    end
+
+    subgraph "5. Final Outputs"
+        G --> G_out[Similarity Score]
+        H --> H_out[Class Logits]
+        I --> I_out[Contrastive Embeddings]
+        J --> J_out[Reconstructed Features]
+    end
+
+    style F fill:#f9f,stroke:#333,stroke-width:2px
+```
 
 ### 🏗️ Core Components
 
