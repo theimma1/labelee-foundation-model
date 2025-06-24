@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Labelee</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/chart.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to Labelee</h1>
+    <p>Test page loaded successfully!</p>
+</body>
+</html>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #4ecdc4;
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #4ecdc4;
+        }
+
+        .architecture {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .component {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .component:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .component-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .component h3 {
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .input-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .file-upload {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .file-upload:hover {
+            border-color: #4ecdc4;
+        }
+
+        .file-upload.dragover {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            color: #ffffff;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-height: 300px;
+        }
+
+        .result-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .task-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .task-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .task-btn.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-color: transparent;
+        }
+
+        .task-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid #4ecdc4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4ecdc4;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.5rem;
+        }
+
+        .code-preview {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .training-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .demo-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .architecture {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(78, 205, 196, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(200px);
+                opacity: 0;
+            }
+        }
+
+        .attribution {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Labelee</div>
+                <nav>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Advanced Multimodal AI</h1>
+            <p>Experience the power of hierarchical understanding and cross-modal fusion with our state-of-the-art vision-language model</p>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <section id="overview" class="section">
+                <h2>🧠 Model Overview</h2>
+                <p>Labelee combines cutting-edge computer vision and natural language processing to understand and connect visual and textual information. Our model features:</p>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">768</div>
+                        <div class="stat-label">Feature Dimensions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Task Types</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10K</div>
+                        <div class="stat-label">Vocabulary Size</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Multi</div>
+                        <div class="stat-label">Modal Fusion</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="demo" class="section">
+                <h2>🚀 Interactive Demo</h2>
+                
+                <div class="task-selector">
+                    <button class="task-btn active" data-task="similarity">Similarity Matching</button>
+                    <button class="task-btn" data-task="classification">Image Classification</button>
+                    <button class="task-btn" data-task="retrieval">Feature Retrieval</button>
+                    <button class="task-btn" data-task="reconstruction">Reconstruction</button>
+                </div>
+
+                <div class="demo-container">
+                    <div class="input-section">
+                        <h3>📁 Input Data</h3>
+                        
+                        <div class="file-upload" id="imageUpload">
+                            <div>📸 Click or drag to upload an image</div>
+                            <input type="file" id="imageFile" accept="image/*" aria-label="Upload an image">
+                        </div>
+                        <div id="imagePreview"></div>
+
+                        <textarea id="textInput" placeholder="Enter your text description here..." aria-label="Text description input"></textarea>
+                        
+                        <button class="btn" id="processBtn" style="width: 100%; margin-top: 1rem;" aria-label="Process input data">
+                            🔍 Process Data
+                        </button>
+                    </div>
+
+                    <div class="results">
+                        <h3>📊 Results</h3>
+                        <div id="resultsContainer">
+                            <p style="color: rgba(255,255,255,0.6); text-align: center; margin-top: 2rem;">
+                                Upload an image and enter text to see the model's analysis
+                            </p>
+                        </div>
+                        <canvas id="trainingChart" style="max-width: 100%; margin-top: 1rem; display: none;"></canvas>
+                        
+                        <div class="loading" id="loading">
+                            <div class="spinner"></div>
+                            <p>Processing your data...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="training-section">
+                    <h3>🧠 Train Your Model</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">
+                        Upload a dataset (CSV or ZIP) to fine-tune Labelee for your needs. Ensure the dataset includes images and text annotations.
+                    </p>
+                    <div class="file-upload" id="datasetUpload">
+                        <div>📂 Upload training dataset (CSV or ZIP)</div>
+                        <input type="file" id="datasetFile" accept=".csv,.zip" aria-label="Upload training dataset">
+                    </div>
+                    <div id="datasetPreview"></div>
+                    <button class="btn" id="trainBtn" style="width: 100%; margin-top: 1rem;" aria-label="Train model with uploaded dataset">
+                        🧠 Train Model
+                    </button>
+                </div>
+            </section>
+
+            <section id="architecture" class="section">
+                <h2>🏗️ Model Architecture</h2>
+                <p>Labelee employs a sophisticated multi-component architecture designed for robust multimodal understanding:</p>
+                
+                <div class="architecture">
+                    <div class="component">
+                        <div class="component-icon">🖼️</div>
+                        <h3>Hierarchical Image Encoder</h3>
+                        <p>Multi-scale feature extraction with spatial attention mechanisms for comprehensive visual understanding</p>
+                    </div>
+                    
+                    <div class="component">
+                        <div class="component-icon">📝</div>
+                        <h3>Semantic Text Encoder</h3>
+                        <p>Contextual word embeddings with multi-granularity text representation at word, phrase, and sentence levels</p>
+                    </div>
+                    
+                    <div class="component">
+                        <div class="component-icon">🔗</div>
+                        <h3>Cross-Modal Fusion</h3>
+                        <p>Interactive attention mechanisms that enable vision and text modalities to inform each other</p>
+                    </div>
+                    
+                    <div class="component">
+                        <div class="component-icon">🎯</div>
+                        <h3>Multi-Task Heads</h3>
+                        <p>Specialized output layers for similarity, classification, retrieval, and reconstruction tasks</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="api" class="section">
+                <h2>🔧 API Usage</h2>
+                <p>Integrate Labelee into your applications with our simple API:</p>
+                
+                <div class="code-preview">
+<pre><code># Initialize the model
+model = Labelee(vocab_size=10000, feature_dim=768, num_classes=1000)
+
+# Process image and text
+similarity_score = model(images, input_ids, attention_mask, task='similarity')
+class_logits = model(images, input_ids, attention_mask, task='classification')
+vision_features, text_features = model(images, input_ids, attention_mask, task='retrieval')
+
+# Multi-task training
+criterion = MultiTaskLoss(alpha=1.0, beta=0.5, gamma=0.3)
+loss = criterion(outputs, labels, task='similarity')</code></pre>
+                </div>
+
+                <h3 style="margin-top: 2rem; color: #4ecdc4;">Key Features:</h3>
+                <ul style="margin-top: 1rem; padding-left: 2rem; color: rgba(255,255,255,0.8);">
+                    <li>Spatial Attention Module for focused visual processing</li>
+                    <li>Contextual Word Embeddings with dynamic gating</li>
+                    <li>Multi-granularity text understanding</li>
+                    <li>Cross-modal interactive attention</li>
+                    <li>Robust error handling and gradient clipping</li>
+                    <li>Multi-task learning capabilities</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <div class="attribution">
+        Created by @1mman0
+    </div>
+
+    <script>
+        let currentTask = 'similarity';
+        let uploadedImage = null;
+        let uploadedDataset = null;
+        let chartInstance = null;
+
+        // Mock tokenizer for client10
+        const mockTokenizer = {
+            vocab: { "<PAD>": 0, "<UNK>": 1, "<CLS>": 2, "<SEP>": 3, "<MASK>": 4, "<NUM>": 5, "<PUNCT>": 6 },
+            vocabSize: 10000,
+            buildVocab(texts) {
+                texts.forEach(text => {
+                    text = text.toLowerCase().replace(/\d+/g, '<NUM>').replace(/[^a-z\s]/g, '<PUNCT>');
+                    const words = text.split(/\s+/);
+                    let idx = Object.keys(this.vocab).length;
+                    words.forEach(word => {
+                        if (!this.vocab[word] && idx < this.vocabSize) {
+                            this.vocab[word] = idx++;
+                        }
+                    });
+                });
+            },
+            encode(text, max_length = 128) {
+                text = text.toLowerCase().replace(/\d+/g, '<NUM>').replace(/[^a-z\s]/g, '<PUNCT>');
+                let words = ["<CLS>", ...text.split(/\s+/), "<SEP>"];
+                let input_ids = words.slice(0, max_length).map(word => this.vocab[word] || this.vocab["<UNK>"]);
+                let attention_mask = input_ids.map(() => 1);
+                while (input_ids.length < max_length) {
+                    input_ids.push(this.vocab["<PAD>"]);
+                    attention_mask.push(0);
+                }
+                return [input_ids, attention_mask];
+            }
+        };
+
+        mockTokenizer.buildVocab(['example text for vocabulary building']);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            createParticles();
+            simulateModelStats();
+        });
+
+        function setupEventListeners() {
+            document.querySelectorAll('.task-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.task-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTask = this.dataset.task;
+                    updateTaskDescription();
+                });
+            });
+
+            const imageUpload = document.getElementById('imageUpload');
+            const imageFile = document.getElementById('imageFile');
+            imageUpload.addEventListener('click', () => imageFile.click());
+            imageUpload.addEventListener('dragover', handleDragOver);
+            imageUpload.addEventListener('drop', handleDrop);
+            imageFile.addEventListener('change', function(e) {
+                handleFile(e.target.files[0]);
+            });
+
+            const datasetUpload = document.getElementById('datasetUpload');
+            const datasetFile = document.getElementById('datasetFile');
+            datasetUpload.addEventListener('click', () => datasetFile.click());
+            datasetUpload.addEventListener('dragover', handleDragOver);
+            datasetUpload.addEventListener('drop', handleDatasetDrop);
+            datasetFile.addEventListener('change', handleDatasetSelect);
+
+            document.getElementById('processBtn').addEventListener('click', processData);
+            document.getElementById('trainBtn').addEventListener('click', trainModel);
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0]) {
+                handleFile(files[0]);
+            } else {
+                alert('Please drop a valid image file.');
+            }
+        }
+
+        function handleDatasetDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleDataset(files[0]);
+            }
+        }
+
+        function handleFile(file) {
+            if (!file || !file.name) {
+                alert('Please upload a valid image file.');
+                return;
+            }
+
+            const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+            const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+            if (!validExtensions.includes(fileExtension) || !file.type.startsWith('image/')) {
+                alert('Please upload a valid image file (e.g., JPG, PNG, GIF).');
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Image file is too large. Please upload an image smaller than 5MB.');
+                return;
+            }
+
+            uploadedImage = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = `
+                    <div style="margin-top: 1rem;">
+                        <img src="${e.target.result}" style="max-width: 100%; height: auto; border-radius: 10px; max-height: 200px;" alt="Uploaded image preview">
+                        <p style="margin-top: 0.5rem; color: rgba(255,255,255,0.7); font-size: 0.9rem;">${file.name}</p>
+                    </div>
+                `;
+            };
+            reader.onerror = () => alert('Failed to read the image file.');
+            reader.readAsDataURL(file);
+        }
+
+        function handleDataset(file) {
+            if (!file || !file.name.endsWith('.csv') && !file.name.endsWith('.zip')) {
+                alert('Please upload a valid CSV or ZIP file.');
+                return;
+            }
+
+            uploadedDataset = file;
+            document.getElementById('datasetPreview').innerHTML = `
+                <div style="margin-top: 1rem;">
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">${file.name}</p>
+                </div>
+            `;
+        }
+
+        function handleDatasetSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleDataset(file);
+            }
+        }
+
+        function updateTaskDescription() {
+            const descriptions = {
+                'similarity': 'Measures how well the image and text description match each other',
+                'classification': 'Classifies the image using textual context and descriptions',
+                'retrieval': 'Extracts feature representations for image-text retrieval tasks',
+                'reconstruction': 'Reconstructs input features for self-supervised learning'
+            };
+            console.log(`Current task: ${currentTask} - ${descriptions[currentTask]}`);
+        }
+
+        async function processData() {
+            const textInput = document.getElementById('textInput').value.trim();
+            if (!uploadedImage && !textInput) {
+                alert('Please provide either an image or text input');
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.getElementById('trainingChart').style.display = 'none';
+            document.getElementById('processBtn').disabled = true;
+
+            try {
+                const [input_ids, attention_mask] = textInput ? mockTokenizer.encode(textInput) : [[], []];
+                const results = await mockModelProcess(uploadedImage, input_ids, attention_mask, currentTask);
+                displayResults(results);
+            } catch (error) {
+                const mockResults = [{
+                    title: 'Demo Result',
+                    value: 'N/A',
+                    description: 'Backend unavailable. This is a mock response for demo purposes.',
+                    confidence: 0.5
+                }];
+                displayResults(mockResults);
+                alert('Failed to process data. Displaying mock results.');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('resultsContainer').style.display = 'block';
+                document.getElementById('processBtn').disabled = false;
+            }
+        }
+
+        async function mockModelProcess(image, input_ids, attention_mask, task) {
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate processing delay
+
+            const mockClasses = ['Dog', 'Cat', 'Car', 'Tree', 'Building'];
+            const results = [];
+
+            if (task === 'similarity') {
+                const score = Math.random() * 0.4 + 0.5; // 0.5-0.9
+                results.push({
+                    title: 'Similarity Score',
+                    value: score.toFixed(2),
+                    description: `The image and text have a similarity score of ${score.toFixed(2)}`,
+                    confidence: score
+                });
+            } else if (task === 'classification') {
+                const classIdx = Math.floor(Math.random() * mockClasses.length);
+                const confidence = Math.random() * 0.4 + 0.5;
+                results.push({
+                    title: 'Classification Result',
+                    value: mockClasses[classIdx],
+                    description: `The image is classified as a ${mockClasses[classIdx]} with text context`,
+                    confidence: confidence
+                });
+            } else if (task === 'retrieval') {
+                results.push({
+                    title: 'Vision Feature Norm',
+                    value: (Math.random() * 10).toFixed(2),
+                    description: 'L2 norm of extracted vision features',
+                    confidence: Math.random() * 0.4 + 0.5
+                });
+                results.push({
+                    title: 'Text Feature Norm',
+                    value: (Math.random() * 10).toFixed(2),
+                    description: 'L2 norm of extracted text features',
+                    confidence: Math.random() * 0.4 + 0.5
+                });
+            } else if (task === 'reconstruction') {
+                results.push({
+                    title: 'Vision Reconstruction Loss',
+                    value: (Math.random() * 0.1).toFixed(4),
+                    description: 'MSE loss for vision feature reconstruction',
+                    confidence: Math.random() * 0.4 + 0.5
+                });
+                results.push({
+                    title: 'Text Reconstruction Loss',
+                    value: (Math.random() * 0.1).toFixed(4),
+                    description: 'MSE loss for text feature reconstruction',
+                    confidence: Math.random() * 0.4 + 0.5
+                });
+            }
+
+            return results;
+        }
+
+        async function trainModel() {
+            if (!uploadedDataset) {
+                alert('Please upload a training dataset');
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.getElementById('trainingChart').style.display = 'none';
+            document.getElementById('trainBtn').disabled = true;
+
+            try {
+                const result = await mockTrainModel();
+                displayTrainingResults(result);
+            } catch (error) {
+                alert('Failed to train model. Check console for details.');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('resultsContainer').style.display = 'block';
+                document.getElementById('trainBtn').disabled = false;
+            }
+        }
+
+        async function mockTrainModel() {
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate training delay
+            const epochs = 10;
+            const trainingLoss = Array.from({ length: epochs }, () => Math.random() * 0.5 + 0.5).map((v, i) => v * (1 - i / epochs));
+            const validationLoss = trainingLoss.map(v => v * (Math.random() * 0.2 + 0.9));
+            return {
+                status: 'Completed',
+                final_loss: trainingLoss[trainingLoss.length - 1],
+                epochs: epochs,
+                loss_curve: {
+                    epochs: Array.from({ length: epochs }, (_, i) => i + 1),
+                    training: trainingLoss,
+                    validation: validationLoss
+                }
+            };
+        }
+
+        function displayResults(results) {
+            document.getElementById('resultsContainer').innerHTML = results.map(result => `
+                <div class="result-item">
+                    <h4 style="color: #4ecdc4; margin-bottom: 0.5rem;">${result.title}</h4>
+                    <div style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">${result.value}</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 0.5rem;">${result.description}</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${result.confidence * 100}%"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function displayTrainingResults(metrics) {
+            document.getElementById('resultsContainer').innerHTML = `
+                <div class="result-item">
+                    <h4 style="color: #4ecdc4; margin-bottom: 0.5rem;">Training Results</h4>
+                    <div style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">${metrics.status}</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        Final Loss: ${metrics.final_loss ? metrics.final_loss.toFixed(4) : 'N/A'}<br>
+                        Epochs Completed: ${metrics.epochs || 'N/A'}
+                    </div>
+                </div>
+            `;
+
+            if (metrics.loss_curve) {
+                document.getElementById('trainingChart').style.display = 'block';
+                if (chartInstance) chartInstance.destroy();
+                chartInstance = new Chart(document.getElementById('trainingChart'), {
+                    type: 'line',
+                    data: {
+                        labels: metrics.loss_curve.epochs.map((_, i) => `Epoch ${i + 1}`),
+                        datasets: [
+                            {
+                                label: 'Training Loss',
+                                data: metrics.loss_curve.training,
+                                borderColor: '#ff6b6b',
+                                backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                                fill: true
+                            },
+                            {
+                                label: 'Validation Loss',
+                                data: metrics.loss_curve.validation,
+                                borderColor: '#4ecdc4',
+                                backgroundColor: 'rgba(78, 205, 196, 0.2)',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Loss' } },
+                            x: { title: { display: true, text: 'Epoch' } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function simulateModelStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const originalText = stat.textContent;
+                if (!isNaN(originalText)) {
+                    animateNumber(stat, 0, parseInt(originalText), 2000);
+                }
+            });
+        }
+
+        function animateNumber(element, start, end, duration) {
+            const startTime = performance.now();
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (end - start) * progress);
+                element.textContent = current.toLocaleString();
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        document.addEventListener('mousemove', function(e) {
+            const components = document.querySelectorAll('.component');
+            components.forEach(component => {
+                const rect = component.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    component.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                } else {
+                    component.style.transform = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

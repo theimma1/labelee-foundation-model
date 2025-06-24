@@ -1,0 +1,396 @@
+css
+/* styles.css for Labelee application */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    color: #fff;
+    background: linear-gradient(135deg, #1a1b26, #2c2d44);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(78, 205, 196, 0.3);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0); }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: rgba(26, 27, 38, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav ul a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul a:hover {
+    color: #ff6b6b;
+}
+
+.section {
+    padding: 80px 5%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.hero {
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #ff6b6b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ff8787;
+    transform: translateY(-2px);
+}
+
+.demo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.task-selector {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.task-btn {
+    padding: 0.8rem;
+    1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.task-btn.active {
+    background: #4ecdc4;
+    border-color: #4ecdc4;
+}
+
+.task-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.drop-area {
+    background: rgba(255, 255, 255, 0.05);
+    border: 12px; dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.drop-area.dragover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ff6b6b;
+}
+
+.drop-area p {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+}
+
+.preview-container {
+    margin-top: 1rem;
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.text-span {
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+textarea {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 150px;
+    width: 100%;
+}
+
+.loading-text {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #4ecdc4;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.results-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.result-item {
+    flex: 1;
+    min-width: 250px;
+    background: rgba(255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 0.2);
+}
+
+.result-title {
+    color: #4ecdc4;
+    margin-bottom: 0.5rem;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.result-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4ecdc4;
+    transition: width 0.3s ease;
+}
+
+.train-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#training-chart {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    max-height: 400px;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(26, 27, 38, 0.8);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .input-group {
+        grid-template-columns: 1fr;
+    }
+    .section {
+        padding: 2rem 5%;
+    }
+}
+```
+</style>
+
+### Setup and Testing Instructions
+
+1. **Create Directory Structure**:
+   - Create the `labelei_app/` directory with subfolders `static/`, `templates/`, `data/`, `checkpoints/`, and `logs/`.
+   - Save `app.py` in the root directory.
+   - Save `index.html` in `templates/`.
+   - Save `styles.css` in `static/`.
+   - Download Chart.js v4.4.1 from `https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.min.js` and place it in `static/`.
+
+2. **Install Dependencies**:
+   ```bash
+   pip install flask flask-cors torch torchvision pillow numpy
+   ```
+
+3. **Run the Backend**:
+   ```bash
+   cd labelei_app
+   python app.py
+   ```
+   - The server should run at `http://localhost:8000`.
+
+4. **Access the Frontend**:
+   - Open `http://localhost:8000` in a browser.
+   - Verify the homepage loads with the Labelee interface.
+
+5. **Test Inference**:
+   - Go to the “Demo” section.
+   - Upload an image (e.g., JPG) and enter text (e.g., “A dog running”).
+   - Select a task (e.g., similarity) and click “Process Data”.
+   - Check results in the UI and `logs/performance.log` for metrics (e.g., similarity score, inference time).
+   - If errors occur, check the Console (DevTools) and log file.
+
+6. **Test Training**:
+   - Go to the “Train” section.
+   - Upload a CSV or ZIP dataset (use the placeholder dataset initially).
+   - Click “Train Model”.
+   - Verify loss curves and training results appear.
+   - Check `logs/performance.log` for epoch losses and training time.
+
+7. **Replace Dataset**:
+   - Implement your `VisionLanguageDataset` class in `app.py` to load your dataset (e.g., CSV with image paths, text, and labels).
+   - Example CSV format:
+     ```csv
+     image_path,text,label
+     images/dog.jpg,"A dog running",0.9
+     images/cat.jpg,"A cat sleeping",0.8
+     ```
+   - Update `__getitem__` to load images using `Image.open(item['image_path'])`.
+
+8. **Evaluate Performance**:
+   - Review `logs/performance.log` for:
+     - Inference: Task-specific metrics (e.g., similarity scores, classification confidence, feature norms, reconstruction losses) and inference times.
+     - Training: Loss curves, final loss, and training time.
+   - Test with varied inputs (e.g., different images, texts, tasks) to assess robustness.
+   - Compare results against expected metrics (e.g., high similarity for matching pairs, low for mismatches).
+
+### Performance Evaluation Focus
+- **Inference**:
+  - **Similarity**: High scores (e.g., >0.8) for matching image-text pairs indicate good alignment.
+  - **Classification**: High confidence (e.g., >0.9) for correct classes suggests strong performance.
+  - **Retrieval**: Large feature norms indicate robust feature extraction.
+  - **Reconstruction**: Low MSE losses (e.g., <0.1) suggest effective feature reconstruction.
+- **Training**: Decreasing loss curves indicate stable learning. Monitor for overfitting (e.g., if loss plateaus or increases).
+- **Timing**: Inference times <1s and training times <10min for 5 epochs (on GPU) are ideal for production.
+- **Logs**: Check `logs/performance.log` for detailed metrics to identify bottlenecks.
+
+### Notes
+- **Module Import**: If you have a packaged `labelee` module, replace the model classes in `app.py` with:
+  ```python
+  from labelee import Labelee, MultiTaskLoss, EnhancedTokenizer
+  ```
+  and remove the class definitions. Confirm the package includes all dependencies.
+- **Dataset**: The placeholder dataset is minimal. Your real dataset should include diverse images and texts for robust evaluation.
+- **Class Names**: Update `class_names` in `/api/process` for classification tasks with your actual class labels.
+- **Production**: For production, add:
+  - Input validation/sanitization.
+  - Authentication for `user_id`.
+  - Scalability (e.g., Gunicorn, multiple workers).
+  - Model optimization (e.g., quantization, ONNX).
+- **Attribution**: Your ownership is clearly marked with "@1mman0" in the backend (comments), frontend (HTML, footer), and logs.
+- **Error Handling**: The app resolves the runtime error by implementing `/api/process` and includes robust error handling to prevent crashes.
+
+This complete implementation focuses on testing your `Labelee` model’s performance, with detailed logging and result reporting to evaluate its readiness for production. Let me know if you need help with the dataset implementation, module packaging, or further performance analysis!

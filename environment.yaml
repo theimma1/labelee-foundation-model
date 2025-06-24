@@ -1,0 +1,34 @@
+name: labelee-env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  # Core Frameworks
+  - python=3.9
+  - pip
+  - pytorch::pytorch
+  - pytorch::torchvision
+  - pytorch::torchaudio
+  # You might need to specify a CUDA version if you have a GPU, e.g.:
+  # - pytorch::pytorch-cuda=11.8 
+
+  # Core ML Libraries from pip
+  - pip:
+    - timm
+    - transformers
+    - scikit-learn
+    - pandas
+    - numpy
+    - ml-collections
+    
+    # Experiment Tracking & Monitoring
+    - wandb 
+    - tensorboard
+
+    # Utilities
+    - tqdm
+    - Pillow
+    - matplotlib
+    - seaborn
